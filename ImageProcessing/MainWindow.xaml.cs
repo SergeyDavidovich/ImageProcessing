@@ -37,14 +37,7 @@ namespace ImageProcessing
         #region Event handlers
         private void ButtonLoad_Click(object sender, RoutedEventArgs e)
         {
-            fileDialog = new OpenFileDialog();
-            fileDialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyPictures);
-            fileDialog.Filter = "Файлы изображений|*.bmp;*.png;*.jpg|Все файлы|*.*";
-            fileDialog.ShowDialog();
-
-            imagePath = fileDialog.FileName;
-
-            loadedImage = Image.FromFile(imagePath);
+            loadedImage = Image.FromFile(GetFilePath());
             edittedImage = loadedImage.Clone() as System.Drawing.Image;
 
             BitmapSource source = GetImageSource(edittedImage);
@@ -123,16 +116,23 @@ namespace ImageProcessing
           factory
               .Load(image)
               .Watermark(new TextLayer()
-              { Text = "Protected!", FontSize = 160, Opacity = 70, DropShadow = true, Style = System.Drawing.FontStyle.Bold, FontColor = Color.White })
+              { 
+                  Text = "Protected!",
+                  FontSize = 160, 
+                  Opacity = 70, 
+                  DropShadow = true, 
+                  Style = System.Drawing.FontStyle.Bold, FontColor = Color.White
+              })
               .Image;
         private Image Overlay(Image image) =>
          factory
              .Load(image)
             .Overlay(new ImageLayer()
             {
-                Image = Image.FromFile($"{Directory.GetCurrentDirectory()}\\Assets\\aircraft.jpg"),
+                Image = Image.FromFile(GetFilePath()),
                 Opacity = 80,
-                Size = new System.Drawing.Size(500, 500), Position=new System.Drawing.Point(800,0)
+                Size = new System.Drawing.Size(800, 500),
+                Position = new System.Drawing.Point(800, 0)
             })
              .Image;
         #endregion
@@ -163,6 +163,15 @@ namespace ImageProcessing
             return bitmapSource;
         }
 
+        private string GetFilePath()
+        {
+            fileDialog = new OpenFileDialog();
+            fileDialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyPictures);
+            fileDialog.Filter = "Файлы изображений|*.bmp;*.png;*.jpg|Все файлы|*.*";
+            fileDialog.ShowDialog();
+
+            return fileDialog.FileName;
+        }
         #endregion
     }
 }
