@@ -5,8 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ImageProcessing"
         mc:Ignorable="d"
-        Title="Window1" Height="450" Width="800" WindowState="Maximized">
-    <Grid>
+        Title="Image processing" Height="720" Width="1080" WindowState="Normal">
+    <Grid Background="Black">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto"/>
             <ColumnDefinition Width="*"/>
@@ -31,11 +31,11 @@
                 </MenuItem>
             </Menu>
         </DockPanel>
-        <ListView Grid.Row="1" Grid.Column="0">
+        <ListView Grid.Row="1" Grid.Column="0" Background="#FF0672BD">
             <ListView.Resources>
                 <Style TargetType="Button">
                     <Setter Property="Margin" Value="4"/>
-                    <Setter Property="Width" Value="100"/>
+                    <Setter Property="Width" Value="140"/>
                     <Setter Property="FontSize" Value="14"/>
                     <EventSetter Event="Click" Handler="ButtonEdit_Click"/>
                 </Style> 
@@ -44,6 +44,10 @@
             <Button Content="Brightness +" Tag="brightness-plus"/>
             <Button Content="Pixelate" Tag="pixelate"/>
             <Button Content="GrayScale" Tag="gray-scale"/>
+            <Button Content="Invert" Tag="invert"/>
+            <Button Content="Comic" Tag="comic"/>
+            <Button Content="Watermark" Tag="watermark"/>
+
         </ListView>
         <Image Grid.Row="1" x:Name="ImageControl" Grid.Column="1"/>
     </Grid>

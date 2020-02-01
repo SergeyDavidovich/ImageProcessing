@@ -1,4 +1,5 @@
 ﻿using ImageProcessor;
+using ImageProcessor.Imaging;
 using ImageProcessor.Imaging.Filters.Photo;
 using Microsoft.Win32;
 using System;
@@ -73,6 +74,15 @@ namespace ImageProcessing
                 case "gray-scale":
                     edittedImage = GrayScale(edittedImage);
                     break;
+                case "invert":
+                    edittedImage = Invert(edittedImage);
+                    break;
+                case "comic":
+                    edittedImage = Comic(edittedImage);
+                    break;
+                case "watermark":
+                    edittedImage = Watermark(edittedImage);
+                    break;
             }
             ImageControl.Source = GetImageSource(edittedImage);
         }
@@ -89,12 +99,27 @@ namespace ImageProcessing
                 .Load(image)
                 .Pixelate(size, null)
                 .Image;
-
         private Image GrayScale(Image image) =>
            factory
                .Load(image)
                .Filter(MatrixFilters.GreyScale)
                .Image;
+        private Image Invert(Image image) =>
+           factory
+               .Load(image)
+               .Filter(MatrixFilters.Invert)
+               .Image;
+        private Image Comic(Image image) =>
+          factory
+              .Load(image)
+              .Filter(MatrixFilters.Comic)
+              .Image;
+
+        private Image Watermark(Image image) =>
+          factory
+              .Load(image).Watermark(new TextLayer()
+                    { Text = "Protected!", FontSize = 160, Opacity = 70, DropShadow = true, Style = System.Drawing.FontStyle.Bold, FontColor = Color.White })
+              .Image;
         #endregion
 
         #region Helpers
