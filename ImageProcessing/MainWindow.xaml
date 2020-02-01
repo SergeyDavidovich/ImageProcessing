@@ -40,7 +40,7 @@
                     <EventSetter Event="Click" Handler="ButtonEdit_Click"/>
                 </Style> 
             </ListView.Resources>
-            <Button Content="Origin Image" Tag="origin-image"/>
+            <Button Content="Reset image" Tag="reset-image"/>
             <Button Content="Brightness +" Tag="brightness-plus"/>
             <Button Content="Pixelate" Tag="pixelate"/>
         </ListView>

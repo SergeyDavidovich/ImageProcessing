@@ -21,6 +21,9 @@ namespace ImageProcessing
         string imagePath;
         System.Drawing.Image loadedImage;
         System.Drawing.Image edittedImage;
+
+        ImageFactory factory = new ImageFactory();
+
         #endregion
         public MainWindow()
         {
@@ -55,9 +58,8 @@ namespace ImageProcessing
         {
             switch ((sender as Button).Tag)
             {
-                case "origin-image":
-                    edittedImage = loadedImage;
-                    
+                case "reset-image":
+                    edittedImage = factory.Reset().Image;
                     break;
                 case "brightness-plus":
                     edittedImage = ChangeBrightness(edittedImage, 10);
@@ -71,14 +73,13 @@ namespace ImageProcessing
         #endregion
 
         #region Utilities
-
         private System.Drawing.Image ChangeBrightness(System.Drawing.Image image, int step) =>
-            new ImageFactory()
+            factory
                 .Load(image)
                 .Brightness(step)
                 .Image;
         private System.Drawing.Image Pixelate(System.Drawing.Image image, int size) =>
-            new ImageFactory()
+            factory
                 .Load(image)
                 .Pixelate(size, null)
                 .Image;
