@@ -19,7 +19,7 @@ using ImageProcessor;
 
 namespace ImageProcessing
 {
-    
+
     public partial class MainWindow : Window
     {
         #region Declarations
@@ -45,8 +45,9 @@ namespace ImageProcessing
             imagePath = fileDialog.FileName;
 
             loadedImage = System.Drawing.Image.FromFile(imagePath);
-          
-            BitmapSource source = GetImageSource(loadedImage);
+            edittedImage = loadedImage;
+
+            BitmapSource source = GetImageSource(edittedImage);
 
             ImageControl.Source = source;
         }
@@ -64,19 +65,35 @@ namespace ImageProcessing
         {
             switch ((sender as ListViewItem).Tag)
             {
-                case "gray-scale":
+                case "origin-image":
+                    edittedImage = loadedImage;
+                    ImageControl.Source = GetImageSource(edittedImage);
                     break;
-                        
+                case "brightness-plus":
+                    ImageControl.Source = GetImageSource(ChangeBrightness(edittedImage, 25));
+                    break;
             }
         }
+
+        #region Utilities
+        private System.Drawing.Image ChangeBrightness(System.Drawing.Image image, int step)
+        {
+            return new ImageFactory()
+                .Load(image)
+                .Brightness(step)
+                .Image;
+        }
+
+        #endregion
+
         /// <summary>
         /// Image to BitmapSource converting
         /// </summary>
         /// <param name="image"></param>
         /// <returns></returns>
-        public BitmapSource GetImageSource(System.Drawing.Image image)
+        private BitmapSource GetImageSource(System.Drawing.Image image)
         {
-        // https://stackoverflow.com/questions/10077498/show-drawing-image-in-wpf
+            // https://stackoverflow.com/questions/10077498/show-drawing-image-in-wpf
 
             var bitmap = new Bitmap(image);
             IntPtr bmpPt = bitmap.GetHbitmap();
@@ -93,5 +110,6 @@ namespace ImageProcessing
 
             return bitmapSource;
         }
+
     }
 }

@@ -35,14 +35,14 @@
             <ListView.Resources>
                 <Style TargetType="ListViewItem">
                     <Setter Property="Margin" Value="4"/>
-                    <Setter Property="Width" Value="80"/>
+                    <Setter Property="Width" Value="100"/>
                     <Setter Property="FontSize" Value="14"/>
                     <EventSetter Event="KeyDown" Handler="ListViewItem_KeyDown"/>
                 </Style> 
             </ListView.Resources>
-            <ListViewItem Content="Default" Tag="default"/>
-            <ListViewItem Content="GrayScale" Tag="gray-scale"/>
+            <ListViewItem Content="Origin Image" Tag="origin-image"/>
+            <ListViewItem Content="Brightness +" Tag="brightness-plus"/>
         </ListView>
-        <Image Grid.Row="1" x:Name="ImageControl" Grid.Column="1"/>
+        <Image Grid.Row="1" x:Name="ImageControl" Grid.Column="1" Source="Assets/aircraft.jpg"/>
     </Grid>
 </Window>
