@@ -62,7 +62,7 @@ namespace ImageProcessing
             switch ((sender as Button).Tag)
             {
                 case "reset-image":
-                    edittedImage = factory.Reset().Image;
+                    edittedImage = loadedImage;
                     break;
                 case "brightness-plus":
                     edittedImage = ChangeBrightness(edittedImage, 10);
