@@ -37,7 +37,7 @@ namespace ImageProcessing
             imagePath = fileDialog.FileName;
 
             loadedImage = System.Drawing.Image.FromFile(imagePath);
-            edittedImage = loadedImage;
+            edittedImage = loadedImage.Clone() as System.Drawing.Image;
 
             BitmapSource source = GetImageSource(edittedImage);
 
@@ -51,9 +51,9 @@ namespace ImageProcessing
         {
             this.Close();
         }
-        private void ListViewItem_KeyDown(object sender, KeyEventArgs e)
+        private void ButtonEdit_Click(object sender, RoutedEventArgs e)
         {
-            switch ((sender as ListViewItem).Tag)
+            switch ((sender as Button).Tag)
             {
                 case "origin-image":
                     edittedImage = loadedImage;
@@ -65,15 +65,15 @@ namespace ImageProcessing
             }
         }
         #endregion
-        
+
         #region Utilities
-        private System.Drawing.Image ChangeBrightness(System.Drawing.Image image, int step)
-        {
-            return new ImageFactory()
+        
+        private System.Drawing.Image ChangeBrightness(System.Drawing.Image image, int step) =>
+            new ImageFactory()
                 .Load(image)
                 .Brightness(step)
                 .Image;
-        }
+
         #endregion
 
         #region Helpers

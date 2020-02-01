@@ -33,16 +33,16 @@
         </DockPanel>
         <ListView Grid.Row="1" Grid.Column="0">
             <ListView.Resources>
-                <Style TargetType="ListViewItem">
+                <Style TargetType="Button">
                     <Setter Property="Margin" Value="4"/>
                     <Setter Property="Width" Value="100"/>
                     <Setter Property="FontSize" Value="14"/>
-                    <EventSetter Event="KeyDown" Handler="ListViewItem_KeyDown"/>
+                    <EventSetter Event="Click" Handler="ButtonEdit_Click"/>
                 </Style> 
             </ListView.Resources>
-            <ListViewItem Content="Origin Image" Tag="origin-image"/>
-            <ListViewItem Content="Brightness +" Tag="brightness-plus"/>
+            <Button Content="Origin Image" Tag="origin-image"/>
+            <Button Content="Brightness +" Tag="brightness-plus"/>
         </ListView>
-        <Image Grid.Row="1" x:Name="ImageControl" Grid.Column="1" Source="Assets/aircraft.jpg"/>
+        <Image Grid.Row="1" x:Name="ImageControl" Grid.Column="1"/>
     </Grid>
 </Window>
