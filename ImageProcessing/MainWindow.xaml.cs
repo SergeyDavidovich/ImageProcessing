@@ -4,6 +4,7 @@ using ImageProcessor.Imaging.Filters.Photo;
 using Microsoft.Win32;
 using System;
 using System.Drawing;
+using System.IO;
 using System.Runtime.InteropServices;
 using System.Windows;
 using System.Windows.Controls;
@@ -83,6 +84,9 @@ namespace ImageProcessing
                 case "watermark":
                     edittedImage = Watermark(edittedImage);
                     break;
+                case "overlay":
+                    edittedImage = Overlay(edittedImage);
+                    break;
             }
             ImageControl.Source = GetImageSource(edittedImage);
         }
@@ -117,9 +121,20 @@ namespace ImageProcessing
 
         private Image Watermark(Image image) =>
           factory
-              .Load(image).Watermark(new TextLayer()
-                    { Text = "Protected!", FontSize = 160, Opacity = 70, DropShadow = true, Style = System.Drawing.FontStyle.Bold, FontColor = Color.White })
+              .Load(image)
+              .Watermark(new TextLayer()
+              { Text = "Protected!", FontSize = 160, Opacity = 70, DropShadow = true, Style = System.Drawing.FontStyle.Bold, FontColor = Color.White })
               .Image;
+        private Image Overlay(Image image) =>
+         factory
+             .Load(image)
+            .Overlay(new ImageLayer()
+            {
+                Image = Image.FromFile($"{Directory.GetCurrentDirectory()}\\Assets\\aircraft.jpg"),
+                Opacity = 80,
+                Size = new System.Drawing.Size(500, 500), Position=new System.Drawing.Point(800,0)
+            })
+             .Image;
         #endregion
 
         #region Helpers

@@ -40,14 +40,14 @@
                     <EventSetter Event="Click" Handler="ButtonEdit_Click"/>
                 </Style> 
             </ListView.Resources>
-            <Button Content="Reset image" Tag="reset-image"/>
+            <Button Content="Reset image" Tag="reset-image" Foreground="Red"/>
             <Button Content="Brightness +" Tag="brightness-plus"/>
             <Button Content="Pixelate" Tag="pixelate"/>
             <Button Content="GrayScale" Tag="gray-scale"/>
             <Button Content="Invert" Tag="invert"/>
             <Button Content="Comic" Tag="comic"/>
             <Button Content="Watermark" Tag="watermark"/>
-
+            <Button Content="Overlay" Tag="overlay"/>
         </ListView>
         <Image Grid.Row="1" x:Name="ImageControl" Grid.Column="1"/>
     </Grid>
