@@ -43,6 +43,7 @@
             <Button Content="Reset image" Tag="reset-image"/>
             <Button Content="Brightness +" Tag="brightness-plus"/>
             <Button Content="Pixelate" Tag="pixelate"/>
+            <Button Content="GrayScale" Tag="gray-scale"/>
         </ListView>
         <Image Grid.Row="1" x:Name="ImageControl" Grid.Column="1"/>
     </Grid>

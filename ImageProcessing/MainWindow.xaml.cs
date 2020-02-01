@@ -1,4 +1,5 @@
 ﻿using ImageProcessor;
+using ImageProcessor.Imaging.Filters.Photo;
 using Microsoft.Win32;
 using System;
 using System.Drawing;
@@ -34,6 +35,7 @@ namespace ImageProcessing
         private void ButtonLoad_Click(object sender, RoutedEventArgs e)
         {
             fileDialog = new OpenFileDialog();
+            fileDialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyPictures);
             fileDialog.Filter = "Файлы изображений|*.bmp;*.png;*.jpg|Все файлы|*.*";
             fileDialog.ShowDialog();
 
@@ -67,6 +69,9 @@ namespace ImageProcessing
                 case "pixelate":
                     edittedImage = Pixelate(edittedImage, 10);
                     break;
+                case "gray-scale":
+                    edittedImage = GrayScale(edittedImage);
+                    break;
             }
             ImageControl.Source = GetImageSource(edittedImage);
         }
@@ -83,6 +88,12 @@ namespace ImageProcessing
                 .Load(image)
                 .Pixelate(size, null)
                 .Image;
+
+        private System.Drawing.Image GrayScale(System.Drawing.Image image) =>
+           factory
+               .Load(image)
+               .Filter(MatrixFilters.GreyScale)
+               .Image;
         #endregion
 
         #region Helpers
