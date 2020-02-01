@@ -1,25 +1,15 @@
-﻿using Microsoft.Win32;
+﻿using ImageProcessor;
+using Microsoft.Win32;
 using System;
-using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
 using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
-using ImageProcessor.Imaging.Filters.Photo;
-using ImageProcessor;
 
 namespace ImageProcessing
 {
-
     public partial class MainWindow : Window
     {
         #region Declarations
@@ -36,6 +26,8 @@ namespace ImageProcessing
         {
             InitializeComponent();
         }
+
+        #region Event handlers
         private void ButtonLoad_Click(object sender, RoutedEventArgs e)
         {
             fileDialog = new OpenFileDialog();
@@ -59,8 +51,6 @@ namespace ImageProcessing
         {
             this.Close();
         }
-
-
         private void ListViewItem_KeyDown(object sender, KeyEventArgs e)
         {
             switch ((sender as ListViewItem).Tag)
@@ -74,7 +64,8 @@ namespace ImageProcessing
                     break;
             }
         }
-
+        #endregion
+        
         #region Utilities
         private System.Drawing.Image ChangeBrightness(System.Drawing.Image image, int step)
         {
@@ -83,18 +74,18 @@ namespace ImageProcessing
                 .Brightness(step)
                 .Image;
         }
-
         #endregion
+
+        #region Helpers
 
         /// <summary>
         /// Image to BitmapSource converting
         /// </summary>
         /// <param name="image"></param>
         /// <returns></returns>
+        /// <see cref="https://stackoverflow.com/questions/10077498/show-drawing-image-in-wpf"/>
         private BitmapSource GetImageSource(System.Drawing.Image image)
         {
-            // https://stackoverflow.com/questions/10077498/show-drawing-image-in-wpf
-
             var bitmap = new Bitmap(image);
             IntPtr bmpPt = bitmap.GetHbitmap();
             BitmapSource bitmapSource =
@@ -111,5 +102,6 @@ namespace ImageProcessing
             return bitmapSource;
         }
 
+        #endregion
     }
 }
