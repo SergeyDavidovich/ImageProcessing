@@ -42,6 +42,7 @@
             </ListView.Resources>
             <Button Content="Origin Image" Tag="origin-image"/>
             <Button Content="Brightness +" Tag="brightness-plus"/>
+            <Button Content="Pixelate" Tag="pixelate"/>
         </ListView>
         <Image Grid.Row="1" x:Name="ImageControl" Grid.Column="1"/>
     </Grid>

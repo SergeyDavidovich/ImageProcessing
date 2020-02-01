@@ -57,24 +57,31 @@ namespace ImageProcessing
             {
                 case "origin-image":
                     edittedImage = loadedImage;
-                    ImageControl.Source = GetImageSource(edittedImage);
+                    
                     break;
                 case "brightness-plus":
                     edittedImage = ChangeBrightness(edittedImage, 10);
-                    ImageControl.Source = GetImageSource(edittedImage);
+                    break;
+                case "pixelate":
+                    edittedImage = Pixelate(edittedImage, 10);
                     break;
             }
+            ImageControl.Source = GetImageSource(edittedImage);
         }
         #endregion
 
         #region Utilities
-        
+
         private System.Drawing.Image ChangeBrightness(System.Drawing.Image image, int step) =>
             new ImageFactory()
                 .Load(image)
                 .Brightness(step)
                 .Image;
-
+        private System.Drawing.Image Pixelate(System.Drawing.Image image, int size) =>
+            new ImageFactory()
+                .Load(image)
+                .Pixelate(size, null)
+                .Image;
         #endregion
 
         #region Helpers
