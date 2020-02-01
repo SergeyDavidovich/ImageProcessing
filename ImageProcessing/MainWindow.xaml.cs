@@ -60,7 +60,8 @@ namespace ImageProcessing
                     ImageControl.Source = GetImageSource(edittedImage);
                     break;
                 case "brightness-plus":
-                    ImageControl.Source = GetImageSource(ChangeBrightness(edittedImage, 25));
+                    edittedImage = ChangeBrightness(edittedImage, 10);
+                    ImageControl.Source = GetImageSource(edittedImage);
                     break;
             }
         }
