@@ -8,6 +8,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media.Imaging;
+using Image = System.Drawing.Image;
 
 namespace ImageProcessing
 {
@@ -41,7 +42,7 @@ namespace ImageProcessing
 
             imagePath = fileDialog.FileName;
 
-            loadedImage = System.Drawing.Image.FromFile(imagePath);
+            loadedImage = Image.FromFile(imagePath);
             edittedImage = loadedImage.Clone() as System.Drawing.Image;
 
             BitmapSource source = GetImageSource(edittedImage);
@@ -78,18 +79,18 @@ namespace ImageProcessing
         #endregion
 
         #region Utilities
-        private System.Drawing.Image ChangeBrightness(System.Drawing.Image image, int step) =>
+        private Image ChangeBrightness(Image image, int step) =>
             factory
                 .Load(image)
                 .Brightness(step)
                 .Image;
-        private System.Drawing.Image Pixelate(System.Drawing.Image image, int size) =>
+        private Image Pixelate(Image image, int size) =>
             factory
                 .Load(image)
                 .Pixelate(size, null)
                 .Image;
 
-        private System.Drawing.Image GrayScale(System.Drawing.Image image) =>
+        private Image GrayScale(Image image) =>
            factory
                .Load(image)
                .Filter(MatrixFilters.GreyScale)
@@ -104,7 +105,7 @@ namespace ImageProcessing
         /// <param name="image"></param>
         /// <returns></returns>
         /// <see cref="https://stackoverflow.com/questions/10077498/show-drawing-image-in-wpf"/>
-        private BitmapSource GetImageSource(System.Drawing.Image image)
+        private BitmapSource GetImageSource(Image image)
         {
             var bitmap = new Bitmap(image);
             IntPtr bmpPt = bitmap.GetHbitmap();
