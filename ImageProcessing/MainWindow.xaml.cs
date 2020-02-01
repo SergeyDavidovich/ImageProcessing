@@ -21,10 +21,9 @@ namespace ImageProcessing
         [DllImport("gdi32.dll")]
         [return: MarshalAs(UnmanagedType.Bool)]
         internal static extern bool DeleteObject(IntPtr value);
-        OpenFileDialog fileDialog;
-        string imagePath;
-        System.Drawing.Image loadedImage;
-        System.Drawing.Image edittedImage;
+
+        Image loadedImage;
+        Image edittedImage;
 
         ImageFactory factory = new ImageFactory();
 
@@ -116,12 +115,13 @@ namespace ImageProcessing
           factory
               .Load(image)
               .Watermark(new TextLayer()
-              { 
+              {
                   Text = "Protected!",
-                  FontSize = 160, 
-                  Opacity = 70, 
-                  DropShadow = true, 
-                  Style = System.Drawing.FontStyle.Bold, FontColor = Color.White
+                  FontSize = 160,
+                  Opacity = 70,
+                  DropShadow = true,
+                  Style = System.Drawing.FontStyle.Bold,
+                  FontColor = Color.White
               })
               .Image;
         private Image Overlay(Image image) =>
@@ -130,7 +130,7 @@ namespace ImageProcessing
             .Overlay(new ImageLayer()
             {
                 Image = Image.FromFile(GetFilePath()),
-                Opacity = 80,
+                Opacity = 100,
                 Size = new System.Drawing.Size(800, 500),
                 Position = new System.Drawing.Point(800, 0)
             })
@@ -165,7 +165,7 @@ namespace ImageProcessing
 
         private string GetFilePath()
         {
-            fileDialog = new OpenFileDialog();
+            var fileDialog = new OpenFileDialog();
             fileDialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyPictures);
             fileDialog.Filter = "Файлы изображений|*.bmp;*.png;*.jpg|Все файлы|*.*";
             fileDialog.ShowDialog();
