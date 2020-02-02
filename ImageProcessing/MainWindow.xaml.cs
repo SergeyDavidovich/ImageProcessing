@@ -155,7 +155,7 @@ namespace ImageProcessing
                 Image = Image.FromFile(GetFilePath()),
                 Opacity = 80,
                 Size = new System.Drawing.Size(800, 500),
-                Position = new System.Drawing.Point(800, 0)
+                Position = new System.Drawing.Point(1000, 200)
             })
              .Image;
         #endregion
