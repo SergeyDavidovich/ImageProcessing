@@ -153,7 +153,7 @@ namespace ImageProcessing
             .Overlay(new ImageLayer()
             {
                 Image = Image.FromFile(GetFilePath()),
-                Opacity = 100,
+                Opacity = 80,
                 Size = new System.Drawing.Size(800, 500),
                 Position = new System.Drawing.Point(800, 0)
             })
