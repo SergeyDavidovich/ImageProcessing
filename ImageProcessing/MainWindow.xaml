@@ -19,11 +19,11 @@
                    Background="#FF3799FB">
             <Menu x:Name="MainMenu">
                 <MenuItem Header="_File">
-                    <MenuItem Header="Load ..." Click="ButtonLoad_Click"/>
-                    <MenuItem Header="Unload" Click="ButtonUnload_Click"/>
-                    <MenuItem Header="Save"/>
+                    <MenuItem Header="Load ..." Click="MenuLoad_Click"/>
+                    <MenuItem Header="Unload" Click="MenuUnload_Click"/>
+                    <MenuItem Header="Save As ..." Click="MenuSaveAs_Click"/>
                     <Separator/>
-                    <MenuItem Header="Quit" Click="ButtonQuit_Click"/>
+                    <MenuItem Header="Quit" Click="MenuQuit_Click"/>
                 </MenuItem>
                 <MenuItem Header="Window">
                     <Separator/>

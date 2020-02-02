@@ -25,6 +25,11 @@ namespace ImageProcessing
         Image loadedImage;
         Image edittedImage;
 
+        string filePath;
+        string fileName;
+        string fileNameExtension;
+        string fileDirectory;
+
         ImageFactory factory = new ImageFactory();
 
         #endregion
@@ -34,20 +39,38 @@ namespace ImageProcessing
         }
 
         #region Event handlers
-        private void ButtonLoad_Click(object sender, RoutedEventArgs e)
+        private void MenuLoad_Click(object sender, RoutedEventArgs e)
         {
-            loadedImage = Image.FromFile(GetFilePath());
-            edittedImage = loadedImage.Clone() as System.Drawing.Image;
 
-            BitmapSource source = GetImageSource(edittedImage);
+            filePath = GetFilePath();
+            if (filePath != null)
+            {
+                loadedImage = Image.FromFile(filePath);
+                edittedImage = loadedImage.Clone() as System.Drawing.Image;
 
-            ImageControl.Source = source;
+                BitmapSource source = GetImageSource(edittedImage);
+
+                ImageControl.Source = source;
+
+                fileName = Path.GetFileNameWithoutExtension(filePath);
+                fileNameExtension = Path.GetExtension(filePath);
+                fileDirectory = Path.GetDirectoryName(filePath);
+            }
         }
-        private void ButtonUnload_Click(object sender, RoutedEventArgs e)
+        private void MenuSaveAs_Click(object sender, RoutedEventArgs e)
+        {
+            SaveFile();
+        }
+        private void MenuUnload_Click(object sender, RoutedEventArgs e)
         {
             ImageControl.Source = null;
+
+            filePath = string.Empty;
+            fileName = String.Empty;
+            fileNameExtension = String.Empty;
+            fileDirectory = String.Empty;
         }
-        private void ButtonQuit_Click(object sender, RoutedEventArgs e)
+        private void MenuQuit_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
         }
@@ -168,10 +191,32 @@ namespace ImageProcessing
             var fileDialog = new OpenFileDialog();
             fileDialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyPictures);
             fileDialog.Filter = "Файлы изображений|*.bmp;*.png;*.jpg|Все файлы|*.*";
-            fileDialog.ShowDialog();
 
-            return fileDialog.FileName;
+            bool? result = fileDialog.ShowDialog();
+
+            if (result == true)
+                return fileDialog.FileName;
+            else return null;
         }
-        #endregion
+        public void SaveFile()
+        {
+            var dlg = new SaveFileDialog();
+
+            dlg.Title = "Save As ...";
+            dlg.InitialDirectory = fileDirectory;
+            dlg.FileName = fileName; 
+            dlg.DefaultExt = fileNameExtension;
+            dlg.Filter = "Файлы изображений|*.bmp;*.png;*.jpg|Все файлы|*.*";
+
+            bool? result = dlg.ShowDialog();
+
+            if (result == true)
+            {
+                string filename = dlg.FileName;
+                factory.Save(filename);
+            }
+            #endregion
+
+        }
     }
 }
