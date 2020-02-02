@@ -1,4 +1,5 @@
 # ImageProcessing
 ImageProcessor library samples
 
-ImageProcessor home page: https://imageprocessor.jpg/
+ImageProcessor home page: https://imageprocessor.org/
+
